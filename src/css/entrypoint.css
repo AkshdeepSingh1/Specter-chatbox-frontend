@@ -1,0 +1,233 @@
+
+*{
+    padding:0px;
+    margin:0px;
+    font-family: 'Quicksand', sans-serif;
+}
+.background{
+    /* background-color: brown;
+    height: 100vh;
+    width: 100vw; */
+
+
+    background-image: url(../assets/background.png); 
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-size: cover;
+}
+a {
+     color: transparent; 
+    text-decoration: underline;
+}
+a:hover {
+    color: transparent;
+}
+/* //////////////////////left column */
+.col1{
+    height: 100vh;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col2{
+    height: 100vh;
+    background-color:transparent;
+}
+.inside-col1{
+margin-bottom: 8rem;
+}
+
+.inside-col1 .welcome{
+    text-align: left;
+    margin-left:6rem;
+    font-size: 2rem;
+    color: whitesmoke;
+}
+.inside-col1 .specter{
+    text-align: left;
+    margin-left:6rem;
+    font-weight: 500;
+    font-size: 3rem;
+    /* background: linear-gradient(to right,#F41B3E,#0dd0f3,#b2c7d5); */
+    
+    background: linear-gradient(to right,#f52a4b,#4080f7,#4080f7,#f52a4b);
+  /* Mask the color to the text, and remove the rest  */
+  -webkit-background-clip: text;
+  /* Make the text fill color value transparent so the masked background color comes through */
+  -webkit-text-fill-color: transparent;
+}
+.inside-col1 .description{
+    text-align: left;
+    margin-left:6rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    margin-right: 5rem;
+    color: whitesmoke;
+}
+
+
+/* ////////////////////////righ column */
+.specter-right{
+    display: none;
+}
+.rightlastcontainer{
+    background-color: #12192F;
+    margin: 15vh 3rem;
+    border-radius: 1rem;
+    padding: 0.3rem;
+    
+}
+.button-options .colorthis{
+    color:#f52a4b;
+    font-weight: 400;
+    transition: 0.5s;
+}
+.rightlastcontainer .container{
+  padding:1rem 2rem;
+  text-align: left;
+}
+.form-label{
+    color:white;
+}
+.rightlastcontainer .container input{
+    background: linear-gradient(#0C1122, #0C1122) padding-box,
+              linear-gradient(45deg, #FF1067, #6F27FD) border-box;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background-color: transparent;
+  color:grey;
+  outline: none;
+  }
+  .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%);
+}
+.rightlastcontainer .container .btn-login-signup{
+    width: 100%;
+    padding: 0.5rem;
+    margin:1rem 0rem ;
+    border-radius: 5rem;
+    border: none;
+    outline: none;
+    background-image: linear-gradient(to right,#F41B3E,#BA549A,#8433DE);
+    color:white;
+    font-weight:500;
+    
+}
+.button-options button{
+    padding:0.8rem;
+    color:white;
+    margin:0 0.2rem;
+    margin-top: 0.5rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.3rem;
+}
+@media screen and (max-width: 750px) {
+    /* //////////////////////left column */
+    .inside-col1 .welcome{
+        text-align: left;
+        margin-left:2rem;
+        font-size: 2rem;
+    }
+    .inside-col1 .specter{
+        text-align: left;
+        margin-left:2rem;
+        font-size: 3rem;
+        margin-right: 3rem;
+        font-weight: 500;
+    }
+    .inside-col1 .description{
+        text-align: left;
+        margin-left:2rem;
+        margin-top: 1rem;
+        font-size: 1rem;
+        margin-right: 4rem;
+    }
+    .button-options button{
+        padding:0.8rem;
+        color:white;
+        margin:0 0.1rem;
+        margin-top: 0.5rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 1.3rem;
+    }
+    .rightlastcontainer{
+        background-color: #12192F;
+        margin: 15vh 1rem;
+        border-radius: 1rem;
+        padding: 0.3rem;
+        
+    }
+}
+
+
+@media screen and (max-width: 545px) {
+    /* //////////////////////left column */
+    .col1  {display: none;
+    }
+
+
+
+    /* ////////////////////////righ column */
+   
+    .specter-right{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 4rem;
+        font-size: 2.5rem;
+        font-weight: 500;
+        background: linear-gradient(to right,#ff032d,#f52a4b,#4080f7,#e23fd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    }
+    .rightlastcontainer{
+        background-color: #12192F;
+        margin: 5vh 3rem;
+        border-radius: 1rem;
+        padding: 1rem;
+        
+    }
+    .button-options button{
+        padding:0.8rem;
+        color:white;
+        margin-top: 0.5rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 1.3rem;
+    }
+    .button-options .login{
+        margin-right:0.5rem;
+    }
+    
+    .button-options .signup{
+        margin-left:0.5rem;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .rightlastcontainer{
+        background-color: #12192F;
+        margin: 15vh 9rem;
+        border-radius: 1rem;
+        padding: 0.3rem;
+        
+    }
+    .button-options button{
+        padding:0.8rem;
+        color:white;
+        margin:0 0.2rem;
+        margin-top: 0.5rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 1.3rem;
+    }
+}
