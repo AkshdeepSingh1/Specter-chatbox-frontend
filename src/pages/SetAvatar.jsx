@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Buffer } from 'buffer'
 export default function SetAvatar() {
 
-     const api = "http://api.multiavatar.com/4645646";
+     const api = "https://api.multiavatar.com/4645646";
    // const api = "http://api.multiavatar.com/hard";
     const navigate = useNavigate();
     const [avatars, setAvatars] = useState([]);
