@@ -1,144 +1,105 @@
-
-import React,{useEffect,useState,useRef} from 'react'
-import styled from 'styled-components'
+import React, { useEffect, useState, useRef } from 'react';
+import styled from 'styled-components';
 import ChatInput from './ChatInput';
-// import Logout from './Logout';
-//import Messages from './Messages';
 import axios from 'axios';
 import { getAllMessagesRoute, sendMessageRoute } from '../utils/APIRoutes';
-import {v4 as uuidv4} from 'uuid';
-import {IoIosArrowRoundBack} from 'react-icons/io'
+import { v4 as uuidv4 } from 'uuid';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 
-export default function ChatContainer({ currentChat ,currentUser, socket, getVisibility}) {
-   
-const [messages , setMessages] = useState([]);
-const [arrivalMessage, setArrivalMessage] = useState(null);
-//const [fromConfirmation, setFromConfirmation]= useState(undefined);
+export default function ChatContainer({ currentChat, currentUser, socket, getVisibility }) {
+  const [messages, setMessages] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [visibilityFromChatContainer, setVisibilityfromChatContainer] = useState(false);
+  const scrollRef = useRef();
 
-const [visibilityFromChatContainer, setVisibilityfromChatContainer] = useState(false);
-
-const scrollRef = useRef();
-
-useEffect(()=>{
-const myfunction = async ()=>{
-    if(currentChat){
-const response = await axios.post(getAllMessagesRoute,{
-    from: currentUser._id,
-    to: currentChat._id,
-});
-//console.log('response',response);
-setMessages(response.data)
-    }
-}
-myfunction();
-
-},[currentChat])
-
-
-
-    const handleSendMessage = async (msg)=>{
-        
-        await axios.post(sendMessageRoute,{
-            from: currentUser._id,
-            to: currentChat._id,
-            message:msg
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (currentChat) {
+        const response = await axios.post(getAllMessagesRoute, {
+          from: currentUser._id,
+          to: currentChat._id,
         });
-        socket.current.emit("send-msg",{
-            to:currentChat._id,
-            from:currentUser._id,
-            message:msg,
-        });
+        setMessages(response.data);
+      }
+    };
+    fetchMessages();
+  }, [currentChat, currentUser._id]);
 
-        const msgs = [...messages];
-        //console.log(msgs);
-        msgs.push({ fromSelf: true, message:msg});
-        setMessages(msgs);
+  const handleSendMessage = async (msg) => {
+    await axios.post(sendMessageRoute, {
+      from: currentUser._id,
+      to: currentChat._id,
+      message: msg,
+    });
+    socket.current.emit('send-msg', {
+      to: currentChat._id,
+      from: currentUser._id,
+      message: msg,
+    });
+
+    setMessages((prevMessages) => [...prevMessages, { fromSelf: true, message: msg }]);
+  };
+
+  useEffect(() => {
+    if (socket.current) {
+      const socketRef = socket.current; // Capture socket.current in a variable
+      socketRef.on('msg-recieve', (msg, cChat) => {
+        if (cChat === currentChat._id) {
+          setArrivalMessage({ fromSelf: false, message: msg });
+        }
+      });
+      return () => socketRef.off('msg-recieve'); // Use socketRef in cleanup function
     }
-   
-        // socket.current.on("msg-recieve",(msg,cChat)=>{
-        //     console.log(cChat+","+currentChat._id);
-        //   if(cChat===currentChat)
-        //    setArrivalMessage({fromSelf: false, message: msg})
-        // })
-     
- 
+  }, [currentChat._id, socket]);
 
-    useEffect(()=>{
-       
-        //console.log('socket.current',socket.current);
-     if(socket.current){
-        socket.current.on("msg-recieve",(msg,cChat)=>{
-           //randomfunction(msg,cChat);
-           if(cChat===currentChat._id){
-            setArrivalMessage({fromSelf: false, message: msg})
-         }
-
-        })
-        return ()=> socket.current.off('msg-recieve');
-     }
-    })
-
-    useEffect(()=>{
-       // console.log('arrivalMessage',arrivalMessage);
-        arrivalMessage && setMessages((prev) => {
-            console.log("in useEfeect 2 ",prev);
-            return [...prev, arrivalMessage]
-        });
-      //  console.log('Messages',messages);
-    },[arrivalMessage]);
-
-    useEffect(()=>{
-        scrollRef.current?.scrollIntoView({behaviour:"smooth"});
-    },[messages])
-
-
-    const handleBackButton = ()=>{
-        setVisibilityfromChatContainer(true);
-        getVisibility(visibilityFromChatContainer)
+  useEffect(() => {
+    if (arrivalMessage) {
+      setMessages((prevMessages) => [...prevMessages, arrivalMessage]);
     }
-    return (
-        <Container>
-            <div className="chat-header">
-                <div className="user-details">
-                    <button onClick={handleBackButton}>
-                     <IoIosArrowRoundBack/>
-                     </button>
-                    <div className="avatar">
-                        <img src={`data:image/svg+xml;base64,${currentChat.avatarImage}`} alt="avatar" />
-                    </div>
-                    <div className="username">
-                        <p>{currentChat.username}</p>
-                    </div>
-                </div>
-                
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const handleBackButton = () => {
+    setVisibilityfromChatContainer(true);
+    getVisibility(visibilityFromChatContainer);
+  };
+
+  return (
+    <Container>
+      <div className="chat-header">
+        <div className="user-details">
+          <button onClick={handleBackButton}>
+            <IoIosArrowRoundBack />
+          </button>
+          <div className="avatar">
+            <img src={`data:image/svg+xml;base64,${currentChat.avatarImage}`} alt="avatar" />
+          </div>
+          <div className="username">
+            <p>{currentChat.username}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="chat-messages">
+        {messages.map((message) => (
+          <div ref={scrollRef} key={uuidv4()}>
+            <div className={`message ${message.fromSelf ? 'sended' : 'received'}`}>
+              <div className="content">
+                <p>{message.message}</p>
+              </div>
             </div>
+          </div>
+        ))}
+      </div>
 
-            
-               <div className="chat-messages">
-                {
-                messages.map((message)=>{
-                    return(
-                        <div ref={scrollRef} key={uuidv4()}>
-                            <div className={`message ${message.fromSelf ? "sended":"recieved"}`}>
-                                <div className="content">
-                                    <p>
-                                       {message.message}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })
-
-                }
-               </div>
-            
-            
-                <ChatInput handleSendMessage={handleSendMessage}/>
-          
-        </Container>
-    )
+      <ChatInput handleSendMessage={handleSendMessage} />
+    </Container>
+  );
 }
+
 const Container = styled.div`
 overflow:hidden;
 background-color:#111528;
