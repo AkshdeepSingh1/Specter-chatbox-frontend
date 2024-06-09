@@ -1,6 +1,6 @@
 //export const host="http://localhost:3000";
 export const host =
-  "http://specter-chatbox-backend-production-84a8.up.railway.app";
+  "https://specter-chatbox-backend-production-84a8.up.railway.app";
 export const createUserRoute = `${host}/api/auth/createuser`;
 export const loginRoute = `${host}/api/auth/login`;
 export const setAvatarRoute = `${host}/api/auth/setAvatar`;
