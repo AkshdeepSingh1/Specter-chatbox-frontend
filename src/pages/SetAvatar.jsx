@@ -68,7 +68,7 @@ export default function SetAvatar() {
     <>
       {isLoading ? (
         <Container>
-          <img src={loader} className="loader" />
+          <img src={loader} className="loader"  alt="Avatar" />
         </Container>
       ) : (
         <Container>

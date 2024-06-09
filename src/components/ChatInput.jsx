@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Picker from 'emoji-picker-react'
+// import Picker from 'emoji-picker-react'
 import { IoMdSend } from 'react-icons/io'
 
-import { BsEmojiSmileFill } from 'react-icons/bs'
+// import { BsEmojiSmileFill } from 'react-icons/bs'
 export default function ChatInput({ handleSendMessage }) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false)
   const [msg, setMsg] = useState("")
 
-  const handleEmojiPickerHideShow = () => {
-    setShowEmojiPicker(!showEmojiPicker);
-  }
+  // const handleEmojiPickerHideShow = () => {
+  //   setShowEmojiPicker(!showEmojiPicker);
+  // }
 
-  const handleEmojiClick = (event, emoji) => {
-    console.log(emoji);
-    let message = msg;
-    message += emoji.emoji;
-    setMsg(message);
-  }
+  // const handleEmojiClick = (event, emoji) => {
+  //   console.log(emoji);
+  //   let message = msg;
+  //   message += emoji.emoji;
+  //   setMsg(message);
+  // }
 
   const sendChat = (event) => {
     event.preventDefault();

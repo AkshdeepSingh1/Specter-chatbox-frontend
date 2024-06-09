@@ -13,7 +13,7 @@ export default function Contacts({ Contacts, CurrentUser, changeChat }) {
             setCurrentUserName(CurrentUser.username)
         }
 
-    }, [CurrentUser])
+    }, [Contacts, CurrentUser])
     const changeCurrentChat = (index, contact) => {
         setVisibilityOfContacts(false);
        // console.log(index, contact)

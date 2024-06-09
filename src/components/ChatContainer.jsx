@@ -2,7 +2,7 @@
 import React,{useEffect,useState,useRef} from 'react'
 import styled from 'styled-components'
 import ChatInput from './ChatInput';
-import Logout from './Logout';
+// import Logout from './Logout';
 //import Messages from './Messages';
 import axios from 'axios';
 import { getAllMessagesRoute, sendMessageRoute } from '../utils/APIRoutes';
@@ -13,7 +13,7 @@ export default function ChatContainer({ currentChat ,currentUser, socket, getVis
    
 const [messages , setMessages] = useState([]);
 const [arrivalMessage, setArrivalMessage] = useState(null);
-const [fromConfirmation, setFromConfirmation]= useState(undefined);
+//const [fromConfirmation, setFromConfirmation]= useState(undefined);
 
 const [visibilityFromChatContainer, setVisibilityfromChatContainer] = useState(false);
 
