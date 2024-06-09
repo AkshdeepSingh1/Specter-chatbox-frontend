@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 // eslint-disable-next-line
-import css from '../css/entrypoint.css';
+import css from "../css/entrypoint.css";
 
 export default function Entrypoint() {
   const location = useLocation();
   const [presentLogin, setPresentLogin] = useState(true);
   const navigate = useNavigate();
-  const hideButtons = ['/entrypoint/forgetPasswordRequest', '/entrypoint/multiFactorAuthentication'].includes(location.pathname);
+  const hideButtons = [
+    "/entrypoint/forgetPasswordRequest",
+    "/entrypoint/multiFactorAuthentication",
+  ].includes(location.pathname);
 
   useEffect(() => {
-    if (localStorage.getItem('user')) {
-      navigate('/');
+    if (localStorage.getItem("user")) {
+      navigate("/");
     }
     // eslint-disable-next-line
   }, []);
@@ -27,7 +30,8 @@ export default function Entrypoint() {
                 <div className="welcome">Welcome!</div>
                 <div className="specter">Specter</div>
                 <div className="description">
-                  Connect with your friends and enjoy an immersive experience on our platform.
+                  Connect with your friends and enjoy an immersive experience on
+                  our platform.
                 </div>
               </div>
             </div>
@@ -39,7 +43,7 @@ export default function Entrypoint() {
                   <div className="button-options">
                     <Link to="login">
                       <button
-                        className={presentLogin ? 'colorthis login' : 'login'}
+                        className={presentLogin ? "colorthis login" : "login"}
                         onClick={() => setPresentLogin(true)}
                       >
                         Log in
@@ -47,7 +51,7 @@ export default function Entrypoint() {
                     </Link>
                     <Link to="register">
                       <button
-                        className={presentLogin ? 'signup' : 'colorthis signup'}
+                        className={presentLogin ? "signup" : "colorthis signup"}
                         onClick={() => setPresentLogin(false)}
                       >
                         Sign up

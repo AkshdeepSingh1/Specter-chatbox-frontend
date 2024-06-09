@@ -26,7 +26,7 @@ export default function Entrypoint() {
   const token = getTokenFromUrl();
 
   useEffect(() => {
-    console.log('Token from useParams:', token); // Log token for debugging
+    console.log("Token from useParams:", token); // Log token for debugging
     if (localStorage.getItem("user")) {
       navigate("/");
     }
@@ -37,34 +37,35 @@ export default function Entrypoint() {
 
     const { newPassword, confirmPassword } = values;
     if (newPassword.length < 8) {
-      toast.error('Password must be at least 8 characters long', toastOptions);
+      toast.error("Password must be at least 8 characters long", toastOptions);
       return;
     }
-    if (newPassword !== confirmPassword) { // Corrected this typo
-      toast.error('Confirm Password does not match', toastOptions);
+    if (newPassword !== confirmPassword) {
+      // Corrected this typo
+      toast.error("Confirm Password does not match", toastOptions);
       return;
     }
     const payload = { token, newPassword };
-    console.log('Payload:', payload); // Log payload for debugging
+    console.log("Payload:", payload); // Log payload for debugging
     try {
-        const response = await fetch(passwordReset, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-          });
+      const response = await fetch(passwordReset, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       const result = await response.json();
 
       if (result.status === true) {
-        toast.success('Password reset successfully', toastOptions);
-        navigate('/entrypoint/login'); // Redirect to login page
+        toast.success("Password reset successfully", toastOptions);
+        navigate("/entrypoint/login"); // Redirect to login page
       } else {
         toast.error(result.error, toastOptions);
       }
     } catch (err) {
-      toast.error('Something went wrong, please try again', toastOptions);
+      toast.error("Something went wrong, please try again", toastOptions);
     }
   };
 
