@@ -58,6 +58,19 @@ margin-bottom: 8rem;
   /* Make the text fill color value transparent so the masked background color comes through */
   -webkit-text-fill-color: transparent;
 }
+.specter{
+    text-align: center;
+    margin-left:6rem;
+    font-weight: 500;
+    font-size: 3rem;
+    /* background: linear-gradient(to right,#F41B3E,#0dd0f3,#b2c7d5); */
+    
+    background: linear-gradient(to right,#f52a4b,#4080f7,#4080f7,#f52a4b);
+  /* Mask the color to the text, and remove the rest  */
+  -webkit-background-clip: text;
+  /* Make the text fill color value transparent so the masked background color comes through */
+  -webkit-text-fill-color: transparent;
+}
 .inside-col1 .description{
     text-align: left;
     margin-left:6rem;
@@ -74,7 +87,7 @@ margin-bottom: 8rem;
 }
 .rightlastcontainer{
     background-color: #12192F;
-    margin: 15vh 3rem;
+    margin: 30% 3rem;
     border-radius: 1rem;
     padding: 0.3rem;
     
@@ -100,7 +113,18 @@ margin-bottom: 8rem;
   color:grey;
   outline: none;
   }
-  .form-control:focus {
+
+input{
+    background: linear-gradient(#0C1122, #0C1122) padding-box,
+              linear-gradient(45deg, #FF1067, #6F27FD) border-box;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background-color: transparent;
+  color:grey;
+  outline: none;
+  }
+
+.form-control:focus {
     box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 0%);
 }
 .rightlastcontainer .container .btn-login-signup{
@@ -114,6 +138,32 @@ margin-bottom: 8rem;
     color:white;
     font-weight:500;
     
+}
+.btn-login-signup{
+    width: 100%;
+    padding: 0.5rem;
+    margin:1rem 0rem ;
+    border-radius: 5rem;
+    border: none;
+    outline: none;
+    background-image: linear-gradient(to right,#F41B3E,#BA549A,#8433DE);
+    color:white;
+    font-weight:500;
+    
+}
+.forget-btn{
+    color:white;
+    cursor: pointer;
+}
+.forget-btn:hover {
+    color: #ebebeb; 
+    text-decoration: underline;
+}
+.forget-password-heading
+{
+    color: white;
+    font-size: large;
+    font-weight: 700;
 }
 .button-options button{
     padding:0.8rem;
@@ -158,7 +208,7 @@ margin-bottom: 8rem;
     }
     .rightlastcontainer{
         background-color: #12192F;
-        margin: 15vh 1rem;
+        margin:50% 1rem;
         border-radius: 1rem;
         padding: 0.3rem;
         
@@ -215,7 +265,7 @@ margin-bottom: 8rem;
 @media screen and (min-width: 1200px){
     .rightlastcontainer{
         background-color: #12192F;
-        margin: 15vh 9rem;
+        margin: 30% 9rem;
         border-radius: 1rem;
         padding: 0.3rem;
         
@@ -231,3 +281,38 @@ margin-bottom: 8rem;
         font-size: 1.3rem;
     }
 }
+
+.background-forget-password {
+  background-image: url(../assets/background.png);/* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  
+  .form-container-forget-password {
+    width: 150%;
+    background: transparent; 
+    padding: 20px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  }
+  .content-wrapper-forget-password {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* .specter-forget-password {
+    font-size: 2em;
+    margin-bottom: 20px; 
+  } */
+  .container-fluid-forget-password {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

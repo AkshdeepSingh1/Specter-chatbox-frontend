@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate,Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { loginRoute } from '../utils/APIRoutes';
+import { requestPasswordReset } from '../utils/APIRoutes';
 
 //import styled from "styled-components";
-export default function Login() {
+export default function ForgetPassword() {
   const navigate = useNavigate();
   const toastOptions = {
     position: 'bottom-right',
@@ -15,8 +15,7 @@ export default function Login() {
     theme: 'dark'
   };
   const [values, setValues] = useState({
-    email: "",
-    password: ""
+    email: ""
   })
   useEffect(() => {
     console.log("useEffect executed (component mounted)")
@@ -34,12 +33,12 @@ export default function Login() {
     if (handleValidation()) {
       //api request
 
-      const { email, password } = values;
+      const { email } = values;
       console.log('inside handlevalidation');
 
-      let data = await fetch(loginRoute, {
+      let data = await fetch(requestPasswordReset, {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email }),
         headers: {
           'Content-Type': 'application/json'
         }
@@ -50,8 +49,7 @@ export default function Login() {
         toast.error(data.error, toastOptions)
       }
       if (data.status === true) {
-        localStorage.setItem('user', JSON.stringify(data.existingUser))
-        navigate('/');
+        toast.success("Email Sent Successfully.", toastOptions);
         console.log(data);
       }
 
@@ -61,13 +59,9 @@ export default function Login() {
     setValues({ ...values, [event.target.name]: event.target.value })
   }
   const handleValidation = () => {
-    const { email, password } = values;
+    const { email } = values;
     console.log('inside handlevalidation');
     if (email.length < 1) {
-      toast.error("User name and password required", toastOptions);
-      return false;
-    }
-    if (password.length < 1) {
       toast.error("User name and password required", toastOptions);
       return false;
     }
@@ -77,26 +71,19 @@ export default function Login() {
   return (
 
 
-    <div className='container'>
+    <div className='container mt-16'>
+        <div className='forget-password-heading mb-3'>Forgot your Password?</div>
       <form onSubmit={(event) => { handleSubmit(event) }}>
         <div className="mb-3 ">
-          <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+          <label htmlFor="exampleInputEmail1" className="form-label mt-3">Email address</label>
           <input
             type="email"
             className="form-control"
             name="email"
             onChange={(e) => { handleChange(e) }} />
         </div>
-        <div className="mb-3 ">
-          <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            onChange={(e) => { handleChange(e) }} />
-        </div>
-        <Link to="/entrypoint/forgetPasswordRequest"> <div className='forget-btn'>Forget Password?</div> </Link>
-        <button className='btn-login-signup' type="submit">Log in</button>
+        <button className='btn-login-signup' type="submit">Send Forget Password Email</button>
+        <Link to="/entrypoint/login"> <div className='forget-btn  text-center'>Go back to home log in page</div> </Link>
       </form>
       <ToastContainer />
     </div>

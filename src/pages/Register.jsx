@@ -55,8 +55,8 @@ export default function Register() {
            }
           if(data.status === true)
           {
-            localStorage.setItem('user',JSON.stringify(data.newUser))
-            navigate('/');
+            //localStorage.setItem('user',JSON.stringify(data.newUser))
+            navigate(`/entrypoint/multiFactorAuthentication?email=${encodeURIComponent(email)}`);
             console.log(data);
           }
          
